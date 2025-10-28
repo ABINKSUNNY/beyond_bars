@@ -1,0 +1,54 @@
+{% extends 'temp/warden.html' %}
+{% block base %}
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin-top: 30px;
+        color: #2c3e50;
+    }
+    table {
+        margin: 30px auto;
+        border-collapse: collapse;
+        width: 80%;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 12px 15px;
+        text-align: center;
+    }
+    th {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+    tr:hover {
+        background-color: #e6f7ff;
+    }
+</style>
+
+<h1>View Payment</h1>
+
+<table>
+    <tr>
+        <th>User Name</th>
+        <th>order id</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+    {% for i in ob %}
+    <tr>
+        <td>{{ i.customer.name }}</td>
+        <th>{{ i.order_id }}</th>
+        <td>{{ i.price }}</td>
+        <td>{{ i.timestamp|date:"M d, Y H:i" }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

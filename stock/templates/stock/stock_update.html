@@ -1,0 +1,33 @@
+{% extends 'temp/warden.html' %}
+
+{% block base %}
+    <center>
+<h2> Product Stock</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Current Stock</th>
+            <th>Update Stock</th>
+        </tr>
+        {% for food in foods %}
+        <tr>
+            <td>{{ food.name }}</td>
+            <td>{{ food.category }}</td>
+            <td>{{ food.price }}</td>
+            <td>{{ food.stock }}</td>
+            <td>
+                <input type="number" name="stock_{{ food.id }}" value="{{ food.stock }}" min="0" />
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <button type="submit">Update Stock</button>
+</form>
+    </center>
+{% endblock %}

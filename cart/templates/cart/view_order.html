@@ -1,0 +1,90 @@
+{% extends 'temp/customer.html' %}
+{% block base %}
+{% load static %}
+
+<style>
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        object-fit: cover;
+    }
+
+    .cancel-btn {
+        display: inline-block;
+        background-color: #28a745; /* Green */
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .cancel-btn:hover {
+        background-color: #218838; /* Darker green */
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<h2>All Customer Orders</h2>
+
+{% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Order ID</th>
+                <th>Payment ID</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        <img src="{{ order.food.image.url }}" alt="{{ order.food.name }}" width="200" height="150">
+                    </td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.price }}</td>
+                    <td>{{ order.total_amount }}</td>
+                    <td>{{ order.order_id }}</td>
+                    <td>{{ order.payment_id }}</td>
+                    <td>{{ order.timestamp|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        <a href="" class="cancel-btn"
+                           onclick="return confirm('Are you sure you want to cancel this order?');">
+                           Cancel Order
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="text-align: center; margin-top: 20px;">No orders available.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'temp/warden.html' %}
+{% block base %}
+
+<style>
+    h1 { text-align: center; margin-top: 40px; color: #2c3e50; }
+    form {
+        width: 300px; margin: 50px auto; text-align: center;
+        padding: 20px; border: 1px solid #ccc; border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); background-color: #fafafa;
+    }
+    input[type="file"] { margin: 15px 0; }
+    input[type="submit"] {
+        background-color: #007bff; border: none; padding: 10px 20px;
+        color: white; border-radius: 4px; cursor: pointer; font-weight: bold;
+    }
+    input[type="submit"]:hover { background-color: #0056b3; }
+</style>
+
+<h1>Upload Daily Purchase Report (PDF)</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="img" accept=".pdf" required><br>
+    <input type="submit" value="Submit">
+</form>
+
+{% if msg %}
+<script>alert("{{ msg }}");</script>
+{% endif %}
+
+{% endblock %}

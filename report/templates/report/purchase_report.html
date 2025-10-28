@@ -1,0 +1,27 @@
+{% extends 'temp/warden.html' %}
+{% block base %}
+<h2 style="text-align:center; margin-top:20px;">Daily Purchase Report</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 90%; margin: auto; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th>Date</th>
+            <th>Total Quantity</th>
+            <th>Total Amount</th>
+            <th>View Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in purchases_by_day %}
+        <tr>
+            <td>{{ row.day }}</td>
+            <td>{{ row.total_quantity }}</td>
+            <td>{{ row.total_amount }}</td>
+            <td>
+                <a href="{% url 'purchase_report_detail' row.day %}">Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

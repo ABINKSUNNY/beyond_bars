@@ -1,0 +1,87 @@
+{% extends 'temp/admin.html' %}
+{% block base %}
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 30px 0;
+        color: #2c3e50;
+    }
+    table {
+        margin: 0 auto 40px auto;
+        border-collapse: collapse;
+        width: 90%;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 12px 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    th {
+        background-color: #f7f7f7;
+        color: #333;
+    }
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+    tr:hover {
+        background-color: #e6f7ff;
+    }
+    a {
+        text-decoration: none;
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+    a.approve {
+        background-color: #28a745;
+        color: white;
+    }
+    a.reject {
+        background-color: #dc3545;
+        color: white;
+    }
+    a.approve:hover {
+        background-color: #218838;
+    }
+    a.reject:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<h1>Registered Wardens</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Approve</th>
+        <th>Reject</th>
+    </tr>
+    {% if obj %}
+        {% for i in obj %}
+        <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.age }}</td>
+            <td>{{ i.address }}</td>
+            <td>{{ i.phone }}</td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.gender }}</td>
+            <td><a href="{% url 'war_ap' idd=i.w_id %}" class="approve">Approve</a></td>
+            <td><a href="{% url 'war_rej' idd=i.w_id %}" class="reject">Reject</a></td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr><td colspan="8">No warden records found.</td></tr>
+    {% endif %}
+</table>
+
+{% endblock %}

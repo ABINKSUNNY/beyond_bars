@@ -1,0 +1,29 @@
+{% extends 'temp/admin.html' %}
+{% block base %}
+<h2 style="text-align:center;">Detailed Report for {{ report_date }}</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 90%; margin: auto;">
+    <thead>
+        <tr>
+{#            <th>Customer</th>#}
+            <th>product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Payment ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for purchase in purchases %}
+        <tr>
+{#            <td>{{ purchase.customer.name if purchase.customer else 'Deleted Customer' }}</td>#}
+            <td>{{ purchase.food.name }}</td>
+            <td>{{ purchase.quantity }}</td>
+            <td>{{ purchase.price }}</td>
+            <td>{{ purchase.total_amount }}</td>
+            <td>{{ purchase.payment_id }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

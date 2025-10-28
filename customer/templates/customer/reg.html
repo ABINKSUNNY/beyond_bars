@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Urbanist', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('{% static "img/bg1.jpg.png" %}') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(10px);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .form-wrapper {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 480px;
+      color: #fff;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #00bfff;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      padding: 10px 0;
+      color: #eee;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    input[type="radio"] {
+      margin-right: 6px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #00bfff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0094cc;
+    }
+
+    .btn-home {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .form-wrapper {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" class="form-wrapper">
+    {% csrf_token %}
+    <h2>Customer Registration</h2>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="name" placeholder="Full Name" required></td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" name="gender" value="male" required> Male
+          <input type="radio" name="gender" value="female" required> Female
+        </td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td><textarea name="address" rows="3" placeholder="Your address" required></textarea></td>
+      </tr>
+{#      <tr>#}
+{#        <td>Phone Number</td>#}
+{#        <td><input type="tel" name="phone" placeholder="Phone number" pattern="" required></td>#}
+{#      </tr>#}
+        <tr>
+  <td>Phone Number</td>
+  <td>
+    <input type="tel" name="phone" placeholder="Phone number" pattern="[0-9]{10}" title="Enter a 10-digit phone number" required>
+  </td>
+</tr>
+
+      <tr>
+        <td>Email</td>
+        <td><input type="email" name="email" placeholder="Email address" required></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" name="pass" placeholder="Create a password" required></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" name="sd" value="Register">
+          <a href="/temp/index/" class="btn-home">Back to Home</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  {% if msg %}
+  <script>
+    alert("{{ msg }}");
+  </script>
+  {% endif %}
+</body>
+</html>

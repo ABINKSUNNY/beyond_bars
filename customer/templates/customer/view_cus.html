@@ -1,0 +1,85 @@
+{% extends 'temp/customer.html' %}
+{% block base %}
+
+<style>
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-family: Arial, sans-serif;
+        margin: 30px 0;
+    }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 85%;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    th, td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+        vertical-align: middle;
+    }
+    th {
+        background-color: #f7f9fc;
+        color: #34495e;
+        font-weight: 600;
+    }
+    tr:nth-child(even) {
+        background-color: #f9fbfd;
+    }
+    tr:hover {
+        background-color: #d6eaff;
+        transition: background-color 0.3s ease;
+    }
+    a {
+        text-decoration: none;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 4px;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+    /* Style specifically for the update link */
+    a.update-link {
+        color: #dc3545; /* Bootstrap's red */
+        background-color: transparent;
+    }
+    a.update-link:hover {
+        color: #fff;
+        background-color: #c82333; /* Darker red */
+        text-decoration: none;
+        box-shadow: 0 2px 6px rgba(200, 35, 51, 0.5);
+    }
+</style>
+
+<h1>View Customers</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in obj %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.adress }}</td>
+        <td>{{ i.phone }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.gender }}</td>
+        <td><a href="{% url 'customer:update' idd=i.c_id %}" class="update-link">Update</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

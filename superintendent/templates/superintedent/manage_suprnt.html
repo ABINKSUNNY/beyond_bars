@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#{% csrf_token %}#}
+<h1 align="center">view superintedent</h1>
+<table align="center" border="1">
+	<tr>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Address</th>
+		<th>Phone number</th>
+        <th>Email</th>
+        <th>Gender</th>
+	</tr>
+    {% for i in ob %}
+
+	<tr>
+		<td>{{ i.name }}</td>
+		<td>{{ i.age }}</td>
+        <td>{{ i.adress }}</td>
+		<td>{{ i.phn_no }}</td>
+		<td>{{ i.email }}</td>
+        <td>{{ i.gender }}</td>
+        <td><a href="{%  url 'aprved' idd=i.s_id %}">approve</a></td>
+        <td><a href="{% url 'rejctt' idd=i.s_id %}">reject</a></td>
+
+	</tr>
+      {% endfor %}
+</table>
+
+</body>
+</html>
